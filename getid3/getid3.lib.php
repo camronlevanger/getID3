@@ -1352,8 +1352,8 @@ class getid3_lib
 	* @return string
 	*/
 	public static function mb_basename($path, $suffix = null) {
-		$splited = preg_split('/\//', rtrim($path, '/ '));
-		return substr(basename('X' . $splited[count($splited) - 1], $suffix), 1);
+		$splited = preg_split('#/#', rtrim($path, '/ '));
+		return substr(basename('X'.$splited[count($splited) - 1], $suffix), 1);
 	}
 
 }

@@ -289,8 +289,9 @@ class getID3
 
 			$this->info['filesize'] = filesize($filename);
 			// set redundant parameters - might be needed in some include file
+			$filename = str_replace('\\', '/', $filename);
+			$this->info['filepath']     = realpath(dirname($filename));
 			$this->info['filename']     = getid3_lib::mb_basename($filename);
-			$this->info['filepath']     = str_replace('\\', '/', realpath(dirname($filename)));
 			$this->info['filenamepath'] = $this->info['filepath'].'/'.$this->info['filename'];
 
 
