@@ -289,8 +289,9 @@ class getID3
 
 			$this->info['filesize'] = filesize($filename);
 			// set redundant parameters - might be needed in some include file
+			// filenames / filepaths in getID3 are always expressed with forward slashes (unix-style) for both Windows and other to try and minimize confusion
 			$filename = str_replace('\\', '/', $filename);
-			$this->info['filepath']     = realpath(dirname($filename));
+			$this->info['filepath']     = str_replace('\\', '/', realpath(dirname($filename)));
 			$this->info['filename']     = getid3_lib::mb_basename($filename);
 			$this->info['filenamepath'] = $this->info['filepath'].'/'.$this->info['filename'];
 
@@ -607,6 +608,14 @@ class getID3
 							'group'     => 'audio',
 							'module'    => 'au',
 							'mime_type' => 'audio/basic',
+						),
+
+				// AMR  - audio       - Adaptive Multi Rate
+				'amr'  => array(
+							'pattern'   => '^\x23\x21AMR\x0A', // #!AMR[0A]
+							'group'     => 'audio',
+							'module'    => 'amr',
+							'mime_type' => 'audio/amr',
 						),
 
 				// AVR  - audio       - Audio Visual Research
